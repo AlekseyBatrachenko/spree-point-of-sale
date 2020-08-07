@@ -4,8 +4,8 @@ Spree::Order.class_eval do
   scope :unpaid, -> { where.not(payment_state: :paid) }
   scope :unpaid_pos_order, -> { pos.unpaid }
 
-  self.whitelisted_ransackable_associations << 'product'
-  self.whitelisted_ransackable_attributes << 'is_pos'
+  ransackable_associations << 'product'
+  ransackable_attributes << 'is_pos'
 
   def clean!
     payments.delete_all
