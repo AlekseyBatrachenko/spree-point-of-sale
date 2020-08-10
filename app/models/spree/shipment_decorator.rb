@@ -3,10 +3,9 @@ Spree::Shipment.class_eval do
   validate :empty_inventory
 
   def finalize_pos
-    self.state = 'shipped'
-    inventory_units.each &:ship!
-    self.save
-    touch :delivered_at
+    ship!
+
+    Rails.logger.info("Order #{order.number} shipped")
   end
 
   def self.create_shipment_for_pos_order
