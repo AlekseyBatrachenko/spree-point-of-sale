@@ -5,7 +5,6 @@ Spree::Order.class_eval do
   scope :unpaid_pos_order, -> { pos.unpaid }
 
   ransackable_associations << 'product'
-  ransackable_attributes << 'is_pos'
 
   def clean!
     payments.delete_all
